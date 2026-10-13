@@ -1,0 +1,6 @@
+services:
+  frontend:
+    image:nginx / build : ./frontend
+  backend:
+    
+  db:
