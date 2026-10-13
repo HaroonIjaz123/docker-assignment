@@ -2,7 +2,7 @@ name: Build Docker Image (Run Commands)
 
 on:
   push:
-    branches: [ "main", "master" ] # Ya jo bhi aapki default branch ho
+    branches: [ "main", "master" ]
 
 jobs:
   build-method1:
@@ -12,12 +12,22 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
+    - name: Setup Node.js (Frontend Build)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install Dependencies and Build Frontend
+      run: |
+        cd frontend
+        npm install
+        npm run build
+        cd ..
+
     - name: Build Docker Image
       run: |
-        docker build -t cityhospital-method1:latest .
+        docker build -t haroonijaz123/bse7_02:method1 -f Dockerfile .
 
     - name: Verify Docker Image
       run: |
-        echo "Verifying local images:"
         docker images
-        echo "Method 1 build verified successfully!"
