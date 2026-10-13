@@ -1,0 +1,30 @@
+name: Build Docker Image (Docker Actions)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-method2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker Image using Action
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        load: true
+        tags: cityhospital-method2:latest
+
+    - name: Verify Docker Image
+      run: |
+        echo "Verifying image built via Docker Action:"
+        docker images | grep cityhospital-method2
+        echo "Method 2 build verified successfully!"

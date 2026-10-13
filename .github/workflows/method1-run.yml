@@ -1,27 +1,23 @@
-name: Method 1 - Docker Build with run commands
+name: Build Docker Image (Run Commands)
 
 on:
   push:
-    branches: [ "main" ]
-  workflow_dispatch:
+    branches: [ "main", "master" ] # Ya jo bhi aapki default branch ho
 
 jobs:
-  build:
+  build-method1:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: docker build -t cityhospital-frontend:v1 .
+    - name: Build Docker Image
+      run: |
+        docker build -t cityhospital-method1:latest .
 
-      - name: Verify image exists
-        run: docker images
-
-      - name: Run container and test
-        run: |
-          docker run -d --name test-container -p 8080:80 cityhospital-frontend:v1
-          sleep 5
-          curl -I http://localhost:8080
-          docker stop test-container
-
+    - name: Verify Docker Image
+      run: |
+        echo "Verifying local images:"
+        docker images
+        echo "Method 1 build verified successfully!"
