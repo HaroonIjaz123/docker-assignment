@@ -1,5 +1,14 @@
-FROM nginx:alpine
 
-COPY frontend/dist /usr/share/nginx/html
+FROM node:20-alpine 
 
-EXPOSE 80
+WORKDIR /app 
+
+COPY package*.json ./ 
+
+RUN npm install --omit=dev 
+
+COPY . . 
+
+EXPOSE 3000 
+
+CMD ["node", "app.js"] 
