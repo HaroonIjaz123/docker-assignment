@@ -140,7 +140,7 @@ export const leadership: Leader[] = [
   },
   {
     id: "l2",
-    name: "Dr. Ayesha Noor",
+    name: "Dr. Salma Saleem",
     role: "Chief Medical Officer",
     bio: "Oversees clinical standards across all departments; previously led cardiology at a leading teaching hospital.",
     photoUrl: "/images/leadership/im2.jpeg",
